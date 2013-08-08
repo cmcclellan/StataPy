@@ -40,8 +40,10 @@ class Model(object):
         result.update(self.paths)
         return result
 
-    # TODO: This path may need to be made relative to this file.
-    with open('template.do') as f:
+    _abspath = os.path.abspath(__file__)
+    _this_directory = os.path.dirname(_abspath)
+    _path_to_template = os.path.join(_this_directory, 'template.do')
+    with open(_path_to_template) as f:
         template = f.read()
 
     def estimate(self):
