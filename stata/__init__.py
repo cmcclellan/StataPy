@@ -53,7 +53,13 @@ class Model(object):
             f.write(text)
         subprocess.call([self.path_to_stata_binary, '-b', self.paths['do']])
         with open(self.paths['json']) as f:
-            result = json.load(f)
+            text = f.read()
+
+        try:
+            result = json.loads(text)
+        except ValueError:
+            raise ValueError("JSON object could not be decoded: %s" % text)
+
         self.cleanup()
         return result
 

@@ -15,7 +15,7 @@ program define mat2json, rclass
   forvalues i = 1/`nrows' {
     local result = "`result'["
     forvalues j = 1/`ncols' {
-      local value = string(`mat'[`i', `j'])
+      local value = string(`mat'[`i', `j'], "%(format)s")
       local result = "`result'`value'"
       if `j' < `ncols' local result = "`result',"
     }
